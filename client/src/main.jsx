@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         path: '/Login',
         element: <Login />
       }, {
-        path: '/Login/:id',
+        path: '/finhealth',
         element: <Finheath />
       },{
         path: '/Finhealth/:id',
