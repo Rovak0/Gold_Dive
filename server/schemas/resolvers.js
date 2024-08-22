@@ -32,6 +32,18 @@ const resolvers = {
         //adding finances
         addIncome: async (parent, {_id, newIncome})=> {
             try{
+                // const userData = await User.findById(_id);
+                // // console.log(userData.incomes);
+                // // console.log(newIncome);
+                // const newIncomeArray = userData.incomes;
+                // newIncomeArray.push(newIncome);
+                // // console.log(newIncomeArray);
+                // const updatedUser = await User.findOneAndUpdate(
+                //     {_id : _id},
+                //     {$set: {incomes: newIncomeArray}},
+                //     {new: true}
+                // );
+                // return updatedUser.incomes;
                 const updatedUser = await User.findOneAndUpdate(
                     {_id : _id},
                     {$push: {incomes: newIncome}},
