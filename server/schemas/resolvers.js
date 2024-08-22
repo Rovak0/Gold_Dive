@@ -2,6 +2,9 @@ const {User} = require('../models');
 
 const resolvers = {
     Query: {
+        users: async () =>{
+            return User.find();
+        },
         user: async (parent, {userId}) => {
             return User.findOne({_id: userId});
         },
@@ -27,40 +30,40 @@ const resolvers = {
             return user;
         },
         //adding finances
-        addIncome: async (parent, {userId, newIncome})=> {
+        addIncome: async (parent, {_id, newIncome})=> {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
-                    {$addToSet: {income: newIncome}},
+                    {_id : _id},
+                    {$push: {incomes: newIncome}},
                     {new: true}
                 );
-                return updatedUser.incomes
+                return updatedUser.incomes;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
             }
         },
-        addExpense: async (parent, {userId, newExpense})=> {
+        addExpense: async (parent, {_id, newExpense})=> {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
-                    {$addToSet: {expenses: newExpense}},
+                    {_id : _id},
+                    {$push: {expenses: newExpense}},
                     {new: true}
                 );
-                return updatedUser.expenses
+                return updatedUser.expenses;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
             }
         },
-        addSaving: async (parent, {userId, newSaving})=> {
+        addSaving: async (parent, {_id, newSaving})=> {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
-                    {$addToSet: {savings: newSaving}},
+                    {_id : _id},
+                    {$push: {savings: newSaving}},
                     {new: true}
                 );
-                return updatedUser.savings
+                return updatedUser.savings;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
@@ -68,40 +71,40 @@ const resolvers = {
         },
 
         //changing finances
-        changeIncomes: async (parent, {userId, replacementIncomes}) => {
+        changeIncomes: async (parent, {_id, replacementIncomes}) => {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
+                    {_id : _id},
                     {$set: {incomes: replacementIncomes}},
                     {new: true}
                 );
-                return updatedUser.incomes
+                return updatedUser.incomes;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
             }
         },
-        changeExpenses: async (parent, {userId, replacementExpenses}) => {
+        changeExpenses: async (parent, {_id, replacementExpenses}) => {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
+                    {_id : _id},
                     {$set: {expenses: replacementExpenses}},
                     {new: true}
                 );
-                return updatedUser.expenses
+                return updatedUser.expenses;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
             }
         },
-        changeSavings: async (parent, {userId, replacementSavings}) => {
+        changeSavings: async (parent, {_id, replacementSavings}) => {
             try{
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id : userId},
+                    {_id : _id},
                     {$set: {savings: replacementSavings}},
                     {new: true}
                 );
-                return updatedUser.savings
+                return updatedUser.savings;
             }
             catch(err){
                 return [500, 500]; //the expected return is a float array
@@ -109,8 +112,8 @@ const resolvers = {
         },
 
         //delete a user
-        deleteUser: async (parent, {userId}) => {
-            const deletedUser = await User.findOneAndDelete({_id: userId});
+        deleteUser: async (parent, {_id}) => {
+            const deletedUser = await User.findOneAndDelete({_id: _id});
             return deletedUser;
         }
     }

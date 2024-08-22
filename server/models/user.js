@@ -23,7 +23,7 @@ const userSchema = new Schema(
         // income, expenses, and savings
         //all of these are arrays because there may be multiple income sources
             //and many types of expenses and savings
-        income: {
+        incomes: {
             type: Array
         },
         expenses: {

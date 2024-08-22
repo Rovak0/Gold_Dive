@@ -12,6 +12,7 @@ const typeDefs = `
 
     type Query{
         #there is only query yourself
+        users: [User]
         user(_id: String!): User
         #Query finances
         incomes(_id: String!): [Float]
@@ -24,7 +25,6 @@ const typeDefs = `
         #so, changes finance
         #Does need to add users
         createUser(
-            _id: String!, 
             username: String!, 
             email: String!, 
             password: String!,
