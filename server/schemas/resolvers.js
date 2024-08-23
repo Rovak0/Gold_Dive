@@ -34,7 +34,30 @@ const resolvers = {
         },
 
         //login
+        login: async (parent, {username, email, password}) => {
+            //find user based on credentials 
+            //needs to be declared up here to be a valid call later
+            let user;
+            if(username){
+                user = await User.findOne({username});
+            } 
+            else if(email){
+                user = await User.findOne({email});
+            }
 
+            if (!user){ //no user, either no username, email, or not found
+                throw AuthenticationError;
+            };
+
+            //built in password checker
+            const passCheck = await user.isCorrectPassword(password);
+            if(!passCheck){
+                throw AuthenticationError;
+            }
+
+            const token = signToken(user);
+            return {token, user};
+        },
 
 
         //adding finances

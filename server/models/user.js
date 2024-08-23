@@ -44,7 +44,6 @@ const userSchema = new Schema(
 //scramble the password before saving
 //this is also middleware
 userSchema.pre('save', async function (next) {
-    console.log("Password scramble");
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
