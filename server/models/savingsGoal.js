@@ -19,3 +19,5 @@ const savingsGoalSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+module.exports = mongoose.model("SavingsGoal", savingsGoalSchema);
