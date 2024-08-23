@@ -32,6 +32,9 @@ const userSchema = new Schema(
     savings: {
       type: Array,
     },
+    budget: {
+      type: Number,
+    },
   },
   {
     toJson: {
