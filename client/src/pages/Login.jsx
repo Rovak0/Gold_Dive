@@ -6,7 +6,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
@@ -35,6 +35,7 @@ const Login = (props) => {
 
     // clear form values
     setFormState({
+      username: '',
       email: '',
       password: '',
     });
@@ -48,11 +49,19 @@ const Login = (props) => {
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You can now dive right in{' '}
+                <Link to="/Finhealth"></Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
+                <input
+                  className="form-input"
+                  placeholder="Your username"
+                  name="username"
+                  type="username"
+                  value={formState.username}
+                  onChange={handleChange}
+                />
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -92,3 +101,4 @@ const Login = (props) => {
 };
 
 export default Login;
+

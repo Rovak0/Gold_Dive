@@ -6,21 +6,40 @@ export const CREATE_USER = gql`
             $username: String!, 
             $email: String!, 
             $password: String!,
-            incomes: [Float],
-            expenses: [Float],
-            savings: [Float]
+            $incomes: [Float],
+            $expenses: [Float],
+            $savings: [Float]
         ) {
             createUser(
                 username: $username,
                 email: $email,
                 password: $password
+                incomes: $incomes
+                expenses: $expenses
+                savings: $savings
             ) {
+                token
+                user{
                     _id
                     username
                     email
                     password
+                }
             }
         }
+`;
+
+export const LOGIN_USER = gql`
+    mutation login($username: String, $email: String, $password: String!){
+        login(username: $username, email: $email, password: $password){
+            token
+            user {
+                _id
+                username
+                password
+            }
+        }
+    }
 `;
 
 
