@@ -31,7 +31,9 @@ const typeDefs = `
             incomes: [Float],
             expenses: [Float],
             savings: [Float]
-        ): User
+        ): Auth 
+        login(username: String!, password: String!): Auth
+
 
         #adding finances
         addIncome(_id: String!, newIncome: Float!): [Float]

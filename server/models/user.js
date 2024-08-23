@@ -51,6 +51,43 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+//scramble financial data with built in node things
+// const crypto = require('node:crypto');
+// //not a good password, but I'll just use the user's password
+//     //I don't think the password will work b/c it is hashed
+//     //I'm going with username
+// const algorithm = 'aes-192-cbc';
+
+// userSchema.pre('findOneAndUpdate', async function (next) {
+//     console.log("Here");
+//     //clause to run encryption
+//     if (this.isNew || this.isModified('incomes')) {
+//         //what to run to encrypt
+//         for (income of this.incomes){
+//             crypto.scrypt(this.username, 'salt', 24, (err, key) => {
+//                 if (err) throw err;
+//                 crypto.randomFill(new Uint8Array(16), (err, iv) => {
+//                     if (err) throw err;
+//                     //make the cypher
+//                     const cipher = crypto.createCipheriv(algorithm, key, iv);
+
+//                     let encrypted = ''; //this is the string that the encyrpted data is stored in
+//                     cipher.setEncoding('hex');
+
+//                     cipher.on('data', (chunk) => encrypted+=chunk); //this creates the encrypted data
+//                     cipher.on('end', () => console.log(encrypted)); //prints encrypted data with key (?)
+
+//                     cipher.write('some clear text data');
+//                     cipher.end();
+//                     this.incomes = encrypted;
+//                 })
+//             })
+//         }
+//     }
+
+//     next();
+// });
+
 //scramble financial data
 // userSchema.pre('save', async function (next) {
 //     if (this.isNew || this.isModified('income')) {
