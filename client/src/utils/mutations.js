@@ -6,14 +6,17 @@ export const CREATE_USER = gql`
             $username: String!, 
             $email: String!, 
             $password: String!,
-            incomes: [Float],
-            expenses: [Float],
-            savings: [Float]
+            $incomes: [Float],
+            $expenses: [Float],
+            $savings: [Float]
         ) {
             createUser(
                 username: $username,
                 email: $email,
                 password: $password
+                incomes: $incomes
+                expenses: $expenses
+                savings: $savings
             ) {
                 token
                 user{
