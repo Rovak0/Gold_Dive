@@ -10,7 +10,6 @@ const Home = () => {
         <h2>Where you can jump into your finaces head first:</h2>
       </div>
       <div className="card-footer text-center m-3">
-        <h2>Ready to create a new matchup?</h2>
         <Link to="/Login">
           <button className="btn btn-lg btn-danger">LogIn</button>
         </Link>

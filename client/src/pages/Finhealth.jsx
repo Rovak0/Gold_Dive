@@ -2,21 +2,36 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import {QUERY_INCOMES} from '../utils/queries';
-import { QUERY_EXPENSES } from '../utils/queries';
-import { QUERY_SAVINGS } from '../utils/queries';
+import {QUERY_EXPENSES} from '../utils/queries';
+import {QUERY_SAVINGS} from '../utils/queries';
 
 const Finhealth = () => {
+    console.log ("hello");
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { financeId } = useParams();
 
-  const { loading, data } = useQuery( {query:QUERY_INCOMES}, {query:QUERY_EXPENSES}, {query:QUERY_SAVINGS}, {
+  const { loading:loadingIncomes, data:dataIncomes } = useQuery(QUERY_INCOMES, {
     // pass URL parameter
     variables: { financeId: financeId },
   });
 
-  const finance = data?.finance || {};
+  const { loading:loadingExpenses, data:dataExpenses } = useQuery(QUERY_EXPENSES, {
+    // pass URL parameter
+    variables: { financeId: financeId },
+  });
 
-  if (loading) {
+  const { loading:loadingSavings, data:dataSavings } = useQuery(QUERY_SAVINGS, {
+    // pass URL parameter
+    variables: { financeId: financeId },
+  });
+
+  const finance = {};
+
+  finance.savings = dataSavings?.savings|| {};
+  finance.expenses = dataExpenses?.expenses|| {};
+  finance.incomes= dataIncomes?.incomes|| {};
+
+  if (loadingSavings || loadingIncomes || loadingExpenses) {
     return <div>Loading...</div>;
   }
   return (

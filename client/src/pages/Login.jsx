@@ -41,6 +41,8 @@ const Login = (props) => {
     });
   };
 
+  
+
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
@@ -50,7 +52,7 @@ const Login = (props) => {
             {data ? (
               <p>
                 Success! You can now dive right in{' '}
-                <Link to="/Finhealth"></Link>
+                <Link to="/Finhealth">test</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -83,8 +85,11 @@ const Login = (props) => {
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
-                  Submit
+                  Login
                 </button>
+                <Link to= "/Finhealth">
+                <button className="btn btn-block btn-info">Bribe the bouncer</button>
+                </Link>
               </form>
             )}
 
@@ -99,6 +104,7 @@ const Login = (props) => {
     </main>
   );
 };
+
 
 export default Login;
 
