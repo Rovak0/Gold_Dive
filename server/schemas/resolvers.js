@@ -1,4 +1,5 @@
 const {User} = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -27,8 +28,15 @@ const resolvers = {
             //id is auto generated
             //incomes, expenses, and savings default to empty array if no inputs
             const user = await User.create({username, email, password, incomes, expenses, savings})
-            return user;
+            //need to give the user a new token
+            const token = signToken(user);
+            return {token, user};
         },
+
+        //login
+
+
+
         //adding finances
         addIncome: async (parent, {_id, newIncome})=> {
             try{
