@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Finheath from './pages/Finhealth';
 import Account from './pages/Account';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/Notfound';
 
 const router = createBrowserRouter([
   {
