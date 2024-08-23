@@ -23,6 +23,7 @@ const typeDefs = `
         incomes(_id: String!): [Float]
         expenses(_id: String!): [Float]
         savings(_id: String!): [Float]
+        budget(_id: String!): [Float]
     }
 
     type Mutation{
