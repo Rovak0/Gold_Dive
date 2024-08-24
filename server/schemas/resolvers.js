@@ -9,20 +9,23 @@ const resolvers = {
     user: async (parent, { _id }) => {
       return await User.findOne({ _id: _id });
     },
-    incomes: async (parent, { _id }) => {
-      const user = await User.findOne({ _id: _id });
+    incomes: async (parent, args, context) => {
+      //the user variables are stored on the token, which is context
+      // console.log(context);
+      // console.log(context.body.variables.username);
+      const user = await User.findOne({ _id:context.body.variables.id });
       return user.incomes;
     },
-    expenses: async (parent, { _id }) => {
-      const user = await User.findOne({ _id: _id });
+    expenses: async (parent, args, context) => {
+      const user = await User.findOne({ _id:context.body.variables.id });
       return user.expenses;
     },
-    savings: async (parent, { _id }) => {
-      const user = await User.findOne({ _id: _id });
+    savings: async (parent, args, context) => {
+      const user = await User.findOne({ _id:context.body.variables.id });
       return user.savings;
     },
-    budget: async (parent, { _id }) => {
-      const user = await User.findOne({ _id: _id });
+    budget: async (parent, args, context) => {
+      const user = await User.findOne({ _id:context.body.variables.id });
       return user.budget;
     },
   },
@@ -43,12 +46,12 @@ const resolvers = {
         savings,
       });
       //need to give the user a new token
-      const token = signToken(user);
+      const token = signToken(username, email, user._id);
       return { token, user };
     },
 
     //login
-    login: async (parent, { username, email, password }) => {
+    login: async (parent, { username, email, password }, context) => {
       //find user based on credentials
       //needs to be declared up here to be a valid call later
       let user;
@@ -69,12 +72,13 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const token = signToken(user);
+      const token = signToken(user.username, user.email, user._id);
+      console.log(token);
       return { token, user };
     },
 
     //adding finances
-    addIncome: async (parent, { _id, newIncome }) => {
+    addIncome: async (parent, {newIncome }, context) => {
       try {
         // const userData = await User.findById(_id);
         // // console.log(userData.incomes);
@@ -89,7 +93,7 @@ const resolvers = {
         // );
         // return updatedUser.incomes;
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id },
           { $push: { incomes: newIncome } },
           { new: true }
         );
@@ -98,10 +102,10 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    addExpense: async (parent, { _id, newExpense }) => {
+    addExpense: async (parent, {newExpense }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id  },
           { $push: { expenses: newExpense } },
           { new: true }
         );
@@ -110,10 +114,13 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    addSaving: async (parent, { _id, newSaving }) => {
+    addSaving: async (parent, { newSaving }, context) => {
       try {
+        console.log(context.body.variables.id );
+        console.log(context.body.variables);
+        console.log(context);
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id  },
           { $push: { savings: newSaving } },
           { new: true }
         );
@@ -124,10 +131,10 @@ const resolvers = {
     },
 
     //changing finances
-    changeIncomes: async (parent, { _id, newIncomes }) => {
+    changeIncomes: async (parent, { newIncomes }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id  },
           { $set: { incomes: newIncomes } },
           { new: true }
         );
@@ -136,10 +143,10 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    changeExpenses: async (parent, { _id, newExpenses }) => {
+    changeExpenses: async (parent, {  newExpenses }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id  },
           { $set: { expenses: newExpenses } },
           { new: true }
         );
@@ -148,10 +155,10 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    changeSavings: async (parent, { _id, newSavings }) => {
+    changeSavings: async (parent, { newSavings }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: _id },
+          { _id: context.body.variables.id  },
           { $set: { savings: newSavings } },
           { new: true }
         );
@@ -162,8 +169,8 @@ const resolvers = {
     },
 
     //delete a user
-    deleteUser: async (parent, { _id }) => {
-      const deletedUser = await User.findOneAndDelete({ _id: _id });
+    deleteUser: async (parent, args, context) => {
+      const deletedUser = await User.findOneAndDelete({ _id: context.body.variables.id });
       return deletedUser;
     },
   },
