@@ -54,6 +54,8 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+
+
 //scramble financial data with built in node things
 // const crypto = require('node:crypto');
 // //not a good password, but I'll just use the user's password

@@ -1,0 +1,10 @@
+[
+    {
+        "username": "Tester",
+        "email": "test@mail.com",
+        "password": "justTesting",
+        "incomes": [750, 1000, 1250],
+        "expenses": [250, 750, 1000],
+        "savings": [100, 900]
+    }
+]

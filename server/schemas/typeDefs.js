@@ -20,10 +20,12 @@ const typeDefs = `
         users: [User]
         user(_id: String!): User
         #Query finances
-        incomes(_id: String!): [Float]
-        expenses(_id: String!): [Float]
-        savings(_id: String!): [Float]
-        budget(_id: String!): [Float]
+        incomes: [Float]
+        expenses: [Float]
+        savings: [Float]
+        budget: [Float]
+        #the unused bits incase I need them back
+        #_id: String! _id: String! _id: String! _id: String!
     }
 
     type Mutation{
@@ -42,18 +44,19 @@ const typeDefs = `
 
 
         #adding finances
-        addIncome(_id: String!, newIncome: Float!): [Float]
-        addExpense(_id: String!, newExpense: Float!): [Float]
-        addSaving(_id: String!, newSaving: Float!): [Float]
+        addIncome(newIncome: Float!): [Float]
+        addExpense(newExpense: Float!): [Float]
+        addSaving(newSaving: Float!): [Float]
 
         #changing finances
-        changeIncomes(_id: String!, newIncomes: [Float]!): [Float]
-        changeExpenses(_id: String!, newExpenses: [Float]!): [Float]
-        changeSavings(_id: String!, newSavings: [Float]!): [Float]
+        changeIncomes(newIncomes: [Float]!): [Float]
+        changeExpenses(newExpenses: [Float]!): [Float]
+        changeSavings(newSavings: [Float]!): [Float]
 
         #delete user
         #This return may be wrong
-        deleteUser(_id: String!): User
+        #this will delete the logged in user
+        deleteUser: User
     }
 
 `;
