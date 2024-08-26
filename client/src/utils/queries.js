@@ -29,26 +29,19 @@ export const QUERY_USER = gql`
 
 
 export const QUERY_INCOMES = gql`
-    query incomes($_id: String){
-        incomes(_id: $_id) {
-            username
-            incomes
-        }
+    query incomes{
+        incomes 
     }
 `;
 
 export const QUERY_EXPENSES = gql`
-    query expenses($_id: String){
-        expenses(_id: $_id) {
-            username
-            expenses
-        }
+    query expenses{
+        expenses
     }
-`;export const QUERY_SAVINGS = gql`
-query savings($_id: String){
-    savings(_id: $_id) {
-        username
-        savings
-    }
+`;
+
+export const QUERY_SAVINGS = gql`
+query savings{
+    savings
 }
 `;

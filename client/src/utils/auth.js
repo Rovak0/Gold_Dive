@@ -27,7 +27,7 @@ class AuthService {
     localStorage.setItem("id_token", idToken);
     const profile = this.getProfile();
 
-    window.location.assign("./Finhealth/" + profile.data._id);
+    window.location.assign("/Finhealth");
   }
 
   logout() {

@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         path: '/Signup',
         element: <Signup />
       },{
-        path: '/Finhealth/:financeId',
+        path: '/Finhealth/',
         element: <Finhealth />
       },{
         path: '/Account',

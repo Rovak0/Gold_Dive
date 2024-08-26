@@ -5,31 +5,40 @@ import {QUERY_INCOMES} from '../utils/queries';
 import {QUERY_EXPENSES} from '../utils/queries';
 import {QUERY_SAVINGS} from '../utils/queries';
 
-const Finhealth = () => {
-    console.log ("hello");
-  // Use `useParams()` to retrieve value of the route parameter `:profileId`
-  const { financeId } = useParams();
+import Auth from '../utils/auth';
 
-  const { loading:loadingIncomes, data:dataIncomes } = useQuery(QUERY_INCOMES, {
-    // pass URL parameter
-    variables: { financeId: financeId },
-  });
+const Finhealth = () => {
+  // console.log ("hello");
+  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  // const { financeId } = useParams();
+  const financeId = Auth.getProfile().data._id;
+  // console.log(financeId); 
+
+  // console.log(QUERY_INCOMES);
+
+  const { loading:loadingIncomes, data:dataIncomes, error } = useQuery(QUERY_INCOMES);
+
 
   const { loading:loadingExpenses, data:dataExpenses } = useQuery(QUERY_EXPENSES, {
     // pass URL parameter
-    variables: { financeId: financeId },
+    // variables: { financeId: financeId },
   });
 
   const { loading:loadingSavings, data:dataSavings } = useQuery(QUERY_SAVINGS, {
     // pass URL parameter
-    variables: { financeId: financeId },
+    // variables: { financeId: financeId },
   });
+  // console.log(error);
+  // console.log(dataIncomes);
 
   const finance = {};
 
+  
   finance.savings = dataSavings?.savings|| {};
   finance.expenses = dataExpenses?.expenses|| {};
   finance.incomes= dataIncomes?.incomes|| {};
+  
+  console.log(finance);
 
   if (loadingSavings || loadingIncomes || loadingExpenses) {
     return <div>Loading...</div>;
