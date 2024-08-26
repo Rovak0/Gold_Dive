@@ -88,7 +88,7 @@ const Login = (props) => {
                   Login
                 </button>
                 <Link to= "/Finhealth">
-                <button className="btn btn-block btn-info">Bribe the bouncer</button>
+                <button className="btn btn-block btn-info">Bribe the bouncer!</button>
                 </Link>
               </form>
             )}

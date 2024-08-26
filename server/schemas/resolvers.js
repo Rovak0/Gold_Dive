@@ -13,19 +13,19 @@ const resolvers = {
       //the user variables are stored on the token, which is context
       // console.log(context);
       // console.log(context.body.variables.username);
-      const user = await User.findOne({ _id:context.body.variables.id });
+      const user = await User.findOne({ _id: context.body.variables.id });
       return user.incomes;
     },
     expenses: async (parent, args, context) => {
-      const user = await User.findOne({ _id:context.body.variables.id });
+      const user = await User.findOne({ _id: context.body.variables.id });
       return user.expenses;
     },
     savings: async (parent, args, context) => {
-      const user = await User.findOne({ _id:context.body.variables.id });
+      const user = await User.findOne({ _id: context.body.variables.id });
       return user.savings;
     },
     budget: async (parent, args, context) => {
-      const user = await User.findOne({ _id:context.body.variables.id });
+      const user = await User.findOne({ _id: context.body.variables.id });
       return user.budget;
     },
   },
@@ -72,13 +72,13 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const token = signToken(user.username, user.email, user._id);
+      const token = signToken(user);
       console.log(token);
       return { token, user };
     },
 
     //adding finances
-    addIncome: async (parent, {newIncome }, context) => {
+    addIncome: async (parent, { newIncome }, context) => {
       try {
         // const userData = await User.findById(_id);
         // // console.log(userData.incomes);
@@ -102,10 +102,10 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    addExpense: async (parent, {newExpense }, context) => {
+    addExpense: async (parent, { newExpense }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id  },
+          { _id: context.body.variables.id },
           { $push: { expenses: newExpense } },
           { new: true }
         );
@@ -116,11 +116,11 @@ const resolvers = {
     },
     addSaving: async (parent, { newSaving }, context) => {
       try {
-        console.log(context.body.variables.id );
+        console.log(context.body.variables.id);
         console.log(context.body.variables);
         console.log(context);
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id  },
+          { _id: context.body.variables.id },
           { $push: { savings: newSaving } },
           { new: true }
         );
@@ -134,7 +134,7 @@ const resolvers = {
     changeIncomes: async (parent, { newIncomes }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id  },
+          { _id: context.body.variables.id },
           { $set: { incomes: newIncomes } },
           { new: true }
         );
@@ -143,10 +143,10 @@ const resolvers = {
         return [500, 500]; //the expected return is a float array
       }
     },
-    changeExpenses: async (parent, {  newExpenses }, context) => {
+    changeExpenses: async (parent, { newExpenses }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id  },
+          { _id: context.body.variables.id },
           { $set: { expenses: newExpenses } },
           { new: true }
         );
@@ -158,7 +158,7 @@ const resolvers = {
     changeSavings: async (parent, { newSavings }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id  },
+          { _id: context.body.variables.id },
           { $set: { savings: newSavings } },
           { new: true }
         );
@@ -170,7 +170,9 @@ const resolvers = {
 
     //delete a user
     deleteUser: async (parent, args, context) => {
-      const deletedUser = await User.findOneAndDelete({ _id: context.body.variables.id });
+      const deletedUser = await User.findOneAndDelete({
+        _id: context.body.variables.id,
+      });
       return deletedUser;
     },
   },
