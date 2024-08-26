@@ -12,7 +12,7 @@ const Finhealth = (props) => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   // const { financeId } = useParams();
   const financeId = Auth.getProfile().data._id;
-  // console.log(financeId); 
+  // console.log(financeId, "Id"); 
 
   // console.log(QUERY_INCOMES);
 
@@ -43,6 +43,20 @@ const Finhealth = (props) => {
   if (loadingSavings || loadingIncomes || loadingExpenses) {
     return <div>Loading...</div>;
   }
+
+  // what to do if the queries are successful, but there is no data
+    //check to see if each one exists, and if it doesn't make it an empty array
+  // if(!finance.incomes){
+  //   finance.incomes = ['No incomes found'];
+  // }
+  // if(!finance.expenses){
+  //   finance.expenses = ['No expenses found'];
+  // }
+  // if(!finance.savings){
+  //   finance.savings = ['No savings found'];
+  // }
+  // console.log(finance, "finance");
+
   return (
     <div>
       <div className='card'> 

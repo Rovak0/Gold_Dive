@@ -44,40 +44,27 @@ export const LOGIN_USER = gql`
 
 //adding finances
 export const CREATE_INCOME = gql`
-  mutation addIncome($_id: String!, $newIncome: Float!) {
-    addIncome(_id: $_id, newIncome: $newIncome) {
-      #these are the returns
-      _id
-      username
-      incomes
-    }
+  mutation addIncome($newIncome: Float!) {
+    addIncome(newIncome: $newIncome)
   }
 `;
 
 export const CREATE_EXPENSE = gql`
-  mutation addExpense($_id: String!, $newExpense: Float!) {
-    addExpense(_id: $_id, newExpense: $newExpense) {
-      _id
-      username
-      expenses
-    }
+  mutation addExpense($newExpense: Float!) {
+    addExpense(newExpense: $newExpense) 
   }
 `;
 
 export const CREATE_SAVING = gql`
-  mutation addSaving($_id: String!, $newSaving: Float!) {
-    addSaving(_id: $_id, newSaving: $newSaving) {
-      _id
-      username
-      savings
-    }
+  mutation addSaving($newSaving: Float!) {
+    addSaving(newSaving: $newSaving) 
   }
 `;
 
 //changing finances
 export const CHANGE_INCOMES = gql`
-  mutation changeIncomes($_id: String!, $newIncomes: [Float]!) {
-    changeIncomes(_id: $_id, newIncomes: $newIncomes) {
+  mutation changeIncomes($newIncomes: [Float]!) {
+    changeIncomes(newIncomes: $newIncomes) {
       _id
       username
       incomes
@@ -86,8 +73,8 @@ export const CHANGE_INCOMES = gql`
 `;
 
 export const CHANGE_EXPENSES = gql`
-  mutation changeExpenses($_id: String!, $newExpenses: [Float]!) {
-    changeExpenses(_id: $_id, newExpenses: $newExpenses) {
+  mutation changeExpenses($newExpenses: [Float]!) {
+    changeExpenses(newExpenses: $newExpenses) {
       _id
       username
       expenses
@@ -96,12 +83,8 @@ export const CHANGE_EXPENSES = gql`
 `;
 
 export const CHANGE_SAVINGS = gql`
-  mutation changeSavings($_id: String!, $newSavings: [Float]!) {
-    changeSavings(_id: $_id, newSavings: $newSavings) {
-      _id
-      username
-      savings
-    }
+  mutation changeSavings($newSavings: [Float]!) {
+    changeSavings( newSavings: $newSavings) 
   }
 `;
 
