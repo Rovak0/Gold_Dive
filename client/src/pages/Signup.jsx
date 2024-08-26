@@ -15,11 +15,11 @@ const Signup = () => {
   
     // update state based on form input changes
     const handleChange = (event) => {
-      const { username, value } = event.target;
+      const { name, value } = event.target;
   
       setFormState({
         ...formState,
-        [username]: value,
+        [name]: value,
       });
     };
   
@@ -55,7 +55,7 @@ const Signup = () => {
                   <input
                     className="form-input"
                     placeholder="Your username"
-                    name="name"
+                    name="username"
                     type="text"
                     value={formState.name}
                     onChange={handleChange}
@@ -81,7 +81,7 @@ const Signup = () => {
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >
-                    Sign up
+                    Sign up now
                   </button>
                 </form>
               )}
