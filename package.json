@@ -9,11 +9,14 @@
     "install": "cd server && npm i && cd ../client && npm i --production=false",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "render-build":"npm install && npm run build"
+    "render-build": "npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.5"
   }
 }
