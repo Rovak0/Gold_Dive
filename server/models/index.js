@@ -1,3 +1,5 @@
-const User = require('./user');
+const User = require("./user");
+const Budget = require("./budget");
+const Expense = require("./expense");
 
-module.exports = {User};
+module.exports = { User, Budget, Expense };

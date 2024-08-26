@@ -23,18 +23,17 @@ const userSchema = new Schema(
     // income, expenses, and savings
     //all of these are arrays because there may be multiple income sources
     //and many types of expenses and savings
-    incomes: {
-      type: Array,
+    incomes: [
+      {
+        type: Number,
+      },
+    ],
+    expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
+    savingsGoal: {
+      type: Schema.Types.ObjectId,
+      ref: "SavingsGoal",
     },
-    expenses: {
-      type: Array,
-    },
-    savings: {
-      type: Array,
-    },
-    budget: {
-      type: Number,
-    },
+    budgets: [{ type: Schema.Types.ObjectId, ref: "Budget" }],
   },
   {
     toJson: {
@@ -53,8 +52,6 @@ userSchema.pre("save", async function (next) {
 
   next();
 });
-
-
 
 //scramble financial data with built in node things
 // const crypto = require('node:crypto');

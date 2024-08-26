@@ -1,16 +1,21 @@
-const Budget = require("./models/Budget");
-const Expense = require("./models/Expense");
+const User = require("../models/user");
 
 const compareSpending = async (userId) => {
-  const budgets = await Budget.find({ userId });
-  const expenses = await Expense.find({ userId });
-
+  //   const user = await User.findById(userId)
+  const user = await User.findOne({ username: "jalenwilliams90" })
+    .populate("budgets")
+    .populate("expenses");
+  const budgets = user.budgets;
+  const expenses = user.expenses;
+  console.log(budgets);
+  console.log(expenses);
   const categoryTotals = expenses.reduce((totals, expense) => {
     totals[expense.category] = (totals[expense.category] || 0) + expense.amount;
     return totals;
   }, {});
 
   const alerts = [];
+  console.log(categoryTotals);
 
   budgets.forEach((budget) => {
     const spending = categoryTotals[budget.category] || 0;
@@ -30,8 +35,10 @@ const compareSpending = async (userId) => {
       });
     }
   });
-
+  console.log(alerts);
   return alerts;
 };
+
+// compareSpending();
 
 module.exports = { compareSpending };
