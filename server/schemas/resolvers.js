@@ -13,19 +13,21 @@ const resolvers = {
       //the user variables are stored on the token, which is context
       // console.log(context);
       // console.log(context.body.variables.username);
-      const user = await User.findOne({ _id: context.body.variables.id });
+      console.log(context.user);
+      const user = await User.findOne({ _id: context.user._id });
+      console.log(user);
       return user.incomes;
     },
     expenses: async (parent, args, context) => {
-      const user = await User.findOne({ _id: context.body.variables.id });
+      const user = await User.findOne({ _id: context.user._id });
       return user.expenses;
     },
     savings: async (parent, args, context) => {
-      const user = await User.findOne({ _id: context.body.variables.id });
+      const user = await User.findOne({ _id: context.user._id });
       return user.savings;
     },
     budget: async (parent, args, context) => {
-      const user = await User.findOne({ _id: context.body.variables.id });
+      const user = await User.findOne({ _id: context.user._id });
       return user.budget;
     },
   },
@@ -93,7 +95,7 @@ const resolvers = {
         // );
         // return updatedUser.incomes;
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $push: { incomes: newIncome } },
           { new: true }
         );
@@ -105,7 +107,7 @@ const resolvers = {
     addExpense: async (parent, { newExpense }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $push: { expenses: newExpense } },
           { new: true }
         );
@@ -116,11 +118,11 @@ const resolvers = {
     },
     addSaving: async (parent, { newSaving }, context) => {
       try {
-        console.log(context.body.variables.id);
+        console.log(context.user._id);
         console.log(context.body.variables);
         console.log(context);
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $push: { savings: newSaving } },
           { new: true }
         );
@@ -134,7 +136,7 @@ const resolvers = {
     changeIncomes: async (parent, { newIncomes }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $set: { incomes: newIncomes } },
           { new: true }
         );
@@ -146,7 +148,7 @@ const resolvers = {
     changeExpenses: async (parent, { newExpenses }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $set: { expenses: newExpenses } },
           { new: true }
         );
@@ -158,7 +160,7 @@ const resolvers = {
     changeSavings: async (parent, { newSavings }, context) => {
       try {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.body.variables.id },
+          { _id: context.user._id },
           { $set: { savings: newSavings } },
           { new: true }
         );
@@ -171,7 +173,7 @@ const resolvers = {
     //delete a user
     deleteUser: async (parent, args, context) => {
       const deletedUser = await User.findOneAndDelete({
-        _id: context.body.variables.id,
+        _id: context.user._id,
       });
       return deletedUser;
     },
