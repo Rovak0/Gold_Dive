@@ -8,13 +8,16 @@ import {QUERY_SAVINGS} from '../utils/queries';
 import Auth from '../utils/auth';
 
 const Finhealth = () => {
-  console.log ("hello");
+  // console.log ("hello");
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   // const { financeId } = useParams();
   const financeId = Auth.getProfile().data._id;
-  console.log(financeId); 
+  // console.log(financeId); 
 
-  const { loading:loadingIncomes, data:dataIncomes } = useQuery(QUERY_INCOMES);
+  // console.log(QUERY_INCOMES);
+
+  const { loading:loadingIncomes, data:dataIncomes, error } = useQuery(QUERY_INCOMES);
+
 
   const { loading:loadingExpenses, data:dataExpenses } = useQuery(QUERY_EXPENSES, {
     // pass URL parameter
@@ -25,14 +28,17 @@ const Finhealth = () => {
     // pass URL parameter
     // variables: { financeId: financeId },
   });
-
+  // console.log(error);
   // console.log(dataIncomes);
 
   const finance = {};
 
+  
   finance.savings = dataSavings?.savings|| {};
   finance.expenses = dataExpenses?.expenses|| {};
   finance.incomes= dataIncomes?.incomes|| {};
+  
+  console.log(finance);
 
   if (loadingSavings || loadingIncomes || loadingExpenses) {
     return <div>Loading...</div>;

@@ -30,27 +30,18 @@ export const QUERY_USER = gql`
 
 export const QUERY_INCOMES = gql`
     query incomes{
-        incomes {
-            username
-            incomes
-        }
+        incomes 
     }
 `;
 
 export const QUERY_EXPENSES = gql`
     query expenses{
-        expenses {
-            username
-            expenses
-        }
+        expenses
     }
 `;
 
 export const QUERY_SAVINGS = gql`
 query savings{
-    savings {
-        username
-        savings
-    }
+    savings
 }
 `;
