@@ -52,7 +52,7 @@ const Login = (props) => {
             {data ? (
               <p>
                 Success! You can now dive right in{' '}
-                <Link to="/Finhealth">test</Link>
+                <Link to="/Finhealth"> Go to Financel Health</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -87,8 +87,8 @@ const Login = (props) => {
                 >
                   Login
                 </button>
-                <Link to= "/Finhealth">
-                <button className="btn btn-block btn-info">Bribe the bouncer!</button>
+                <Link to= "/Signup">
+                <button className="btn btn-block btn-info">Sign up</button>
                 </Link>
               </form>
             )}

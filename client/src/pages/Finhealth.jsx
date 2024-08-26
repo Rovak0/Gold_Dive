@@ -37,9 +37,9 @@ const Finhealth = () => {
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
-        {finance.financeAuthor} <br />
+        {finance.savings} <br />
         <span style={{ fontSize: '1rem' }}>
-           {finance.createdAt}
+           {finance.expenses}
         </span>
       </h3>
       <div className="bg-light py-4">
@@ -52,8 +52,12 @@ const Finhealth = () => {
             lineHeight: '1.5',
           }}
         >
-          {finance.financeText}
+          {finance.incomes}
         </blockquote>
+
+        <Link to= "/Account">
+          <button className="btn btn-block btn-info">Account</button>
+        </Link>
       </div>
     </div>
   );
