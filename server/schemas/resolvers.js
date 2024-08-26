@@ -11,14 +11,8 @@ const resolvers = {
     },
     incomes: async (parent, args, context) => {
       //the user variables are stored on the token, which is context
-      // console.log(context);
-      // console.log(context.body.variables.username);
-      // console.log(context);
-      console.log(context.user, "UserIncomes");
-      // console.log(context.body, "Data");
       
       const user = await User.findOne({ _id: context.user._id });
-      console.log(user, "User");
       return user.incomes;
     },
     expenses: async (parent, args, context) => {
@@ -38,7 +32,7 @@ const resolvers = {
   Mutation: {
     createUser: async (
       parent,
-      { username, email, password, incomes = [], expenses = [], savings = [] }
+      { username, email, password} //, incomes = [], expenses = [], savings = [] 
     ) => {
       //id is auto generated
       //incomes, expenses, and savings default to empty array if no inputs
@@ -46,12 +40,12 @@ const resolvers = {
         username,
         email,
         password,
-        incomes,
-        expenses,
-        savings,
+        incomes: [],
+        expenses: [],
+        savings: [],
       });
       //need to give the user a new token
-      const token = signToken(username, email, user._id);
+      const token = signToken(user);
       return { token, user };
     },
 
@@ -84,6 +78,7 @@ const resolvers = {
 
     //adding finances
     addIncome: async (parent, { newIncome }, context) => {
+      console.log('Hi');
       try {
         // const userData = await User.findById(_id);
         // // console.log(userData.incomes);
@@ -121,9 +116,6 @@ const resolvers = {
     },
     addSaving: async (parent, { newSaving }, context) => {
       try {
-        console.log(context.user._id);
-        console.log(context.body.variables);
-        console.log(context);
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { savings: newSaving } },
