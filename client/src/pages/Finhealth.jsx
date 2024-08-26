@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 import {QUERY_INCOMES} from '../utils/queries';
 import {QUERY_EXPENSES} from '../utils/queries';
@@ -7,7 +7,7 @@ import {QUERY_SAVINGS} from '../utils/queries';
 
 import Auth from '../utils/auth';
 
-const Finhealth = () => {
+const Finhealth = (props) => {
   // console.log ("hello");
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   // const { financeId } = useParams();
@@ -44,31 +44,45 @@ const Finhealth = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="my-3">
-      <h3 className="card-header bg-dark text-light p-2 m-0">
-        {finance.savings} <br />
-        <span style={{ fontSize: '1rem' }}>
-           {finance.expenses}
-        </span>
-      </h3>
-      <div className="bg-light py-4">
-        <blockquote
-          className="p-4"
-          style={{
-            fontSize: '1.5rem',
-            fontStyle: 'italic',
-            border: '2px dotted #1a1a1a',
-            lineHeight: '1.5',
-          }}
-        >
-          {finance.incomes}
-        </blockquote>
+    <div>
+      <div className='card'> 
+        <h2>Incomes</h2>
+        <ul className="list-group">
+        {finance.incomes.map(cashsource => (
+        <li className="list-group-item">
+          {cashsource}
+      </li>
+      ))}
+      </ul>
+    </div>
+
+    <div className='card'>
+      <h2>Expenses</h2>
+      <ul className="list-group">
+      {finance.expenses.map(cashdrain => (
+      <li className="list-group-item">
+        {cashdrain}
+      </li>
+      ))}
+      </ul>
+    </div>
+
+    <div className='card'>
+      <h2>Savings</h2>
+      <ul className="list-group">
+      {finance.savings.map(cashstorage => (
+      <li className="list-group-item">
+        {cashstorage}
+      </li>
+      ))}
+      </ul>
+    </div>
 
         <Link to= "/Account">
           <button className="btn btn-block btn-info">Account</button>
         </Link>
-      </div>
-    </div>
+     </div>
+    
   );
 };
 
