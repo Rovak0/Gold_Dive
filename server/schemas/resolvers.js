@@ -13,9 +13,12 @@ const resolvers = {
       //the user variables are stored on the token, which is context
       // console.log(context);
       // console.log(context.body.variables.username);
-      console.log(context.user);
+      // console.log(context);
+      console.log(context.user, "UserIncomes");
+      // console.log(context.body, "Data");
+      
       const user = await User.findOne({ _id: context.user._id });
-      console.log(user);
+      console.log(user, "User");
       return user.incomes;
     },
     expenses: async (parent, args, context) => {
