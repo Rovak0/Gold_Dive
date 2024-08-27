@@ -42,7 +42,7 @@ const resolvers = {
         password,
         incomes: [],
         expenses: [],
-        savingsGoal: [],
+        savings: [],
         budgets: []
       });
       //need to give the user a new token
