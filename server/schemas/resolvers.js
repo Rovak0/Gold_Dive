@@ -43,6 +43,7 @@ const resolvers = {
         incomes: [],
         expenses: [],
         savings: [],
+        budgets: []
       });
       //need to give the user a new token
       const token = signToken(user);
