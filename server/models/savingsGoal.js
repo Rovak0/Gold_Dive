@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const savingsGoalSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
   goalAmount: {
     type: Number,
     required: true,
@@ -20,4 +15,4 @@ const savingsGoalSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("SavingsGoal", savingsGoalSchema);
+module.exports = savingsGoalSchema;
