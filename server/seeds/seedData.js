@@ -48,4 +48,10 @@ module.exports = {
       limit: 100,
     },
   ],
+  savings: [
+    {
+      goalAmount: 2000,
+      targetDate: "12/27/2024",
+    },
+  ],
 };

@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const savingsGoalSchema = require("./savingsGoal");
 
 const userSchema = new Schema(
   //object variables
@@ -29,10 +30,7 @@ const userSchema = new Schema(
       },
     ],
     expenses: [{ type: Schema.Types.ObjectId, ref: "Expense" }],
-    savingsGoal: {
-      type: Schema.Types.ObjectId,
-      ref: "SavingsGoal",
-    },
+    savings: savingsGoalSchema,
     budgets: [{ type: Schema.Types.ObjectId, ref: "Budget" }],
   },
   {

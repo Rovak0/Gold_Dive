@@ -1,15 +1,15 @@
 const db = require("../config/connection");
-const { User, Budget, Expense } = require("../models");
+const { User, Budget, Expense, SavingsGoal } = require("../models");
 const cleanDB = require("./cleanDB");
 
-const { users, budgets, expenses } = require("./seedData");
-
+const { users, budgets, expenses, savings } = require("./seedData");
 db.once("open", async () => {
   await cleanDB("User", "users");
   await cleanDB("Budget", "budgets");
   await cleanDB("Expense", "expenses");
   let newUser;
   for (user of users) {
+    user.savings = savings[0];
     newUser = await User.create(user);
   }
   for (budget of budgets) {
@@ -39,6 +39,7 @@ db.once("open", async () => {
       }
     );
   }
+
   // await User.insertMany(userData);
 
   console.log("Users seeded!");

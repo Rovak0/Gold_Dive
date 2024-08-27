@@ -1,4 +1,5 @@
-const SavingsGoal = require("./models/SavingsGoal");
+const User = require("../models/user");
+const SavingsGoal = require("../models/savingsGoal");
 
 const updateSavingsGoals = async () => {
   const goals = await SavingsGoal.find();
